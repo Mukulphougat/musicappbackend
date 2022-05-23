@@ -1,0 +1,70 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+          rel="stylesheet">
+    <title>Music</title>
+
+</head>
+<body class="bg-sky-400">
+
+<div >
+    <div class="text-center py-1">
+        <h1 class="text-6xl font-extrabold text-white pb-4">Music Archive</h1>
+        <img class="rounded-2xl mx-auto" src="https://media.giphy.com/media/3oriNYvVkCgIhSIKic/giphy.gif" width="200">
+        <div>
+            <form  method="post" enctype="multipart/form-data" action="/">
+                <label class="mx-2 text-xl text-white">Song to upload</label>
+                <input name="songFile" class="bg-black ring-1 ring-gray-800 text-white font-medium p-1 rounded-xl"
+                       type="file"/>
+                <button class="customStyle bg-black ring-1 ring-gray-800 text-white font-medium p-1 text-2xl rounded-xl hover:bg-white hover:text-black"
+                        type="submit">Upload Song
+                </button>
+            </form>
+        </div>
+    </div>
+    <div></div>
+
+    <div class="flex flex-row justify-center">
+        <table class="border rounded-2xl border rounded-lg overflow-hidden ">
+            <thead>
+            <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                <th class="px-4 py-3">Song</th>
+                <th class="px-4 py-3">Audio</th>
+            </tr>
+            </thead>
+            <tbody class="bg-white">
+            <tr th:each="song: ${songFileName}" class="text-gray-700">
+                <td class="px-4 py-3 border">
+                    <div class="flex items-center text-sm">
+                        <div class="relative w-8 h-8 mr-3 rounded-full md:block">
+                            <img class="object-cover w-full h-full rounded-full"
+                                 src="https://media.giphy.com/media/3oEduR8JONr03Z8TuM/giphy.gif" alt=""
+                                 loading="lazy"/>
+                            <div class="absolute inset-0 rounded-full shadow-inner"
+                                 aria-hidden="true"></div>
+                        </div>
+                        <div>
+                            <p th:text="${song}" class="font-semibold text-black">Karan Aujla</p>
+                            <!--                                <p class="text-xs text-gray-600">Developer</p>-->
+                        </div>
+                    </div>
+                </td>
+                <td class="px-4 py-3 text-sm border">
+                    <audio controls>
+                        <source th:src="${'https://musicarchivemukul.s3.amazonaws.com/'+song}"
+                                type="audio/mpeg">
+                    </audio>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
